@@ -1,0 +1,11 @@
+task,candidate,val_acc
+image,k-NN,0.5805
+image,Random Forest,0.36625
+image,NN ensemble (5 seeds),0.4095
+image,NN ensemble + k-NN,0.51
+image,NN ensemble + k-NN + RF,0.5135
+sentiment,k-NN,0.5933333333333334
+sentiment,Random Forest,0.6029166666666667
+sentiment,NN ensemble (5 seeds),0.68
+sentiment,NN ensemble + k-NN,0.6691666666666667
+sentiment,NN ensemble + k-NN + RF,0.66375

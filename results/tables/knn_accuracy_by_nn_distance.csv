@@ -1,0 +1,11 @@
+task,nearest_neighbour_distance,one_nn_accuracy,median_distance
+image,closest 20%,0.87625,0.44545528
+image,2nd,0.71625,0.55172217
+image,3rd,0.6175,0.62845314
+image,4th,0.4025,0.69952255
+image,farthest 20%,0.2025,0.7559359
+sentiment,closest 20%,0.5208333333333334,0.1167804
+sentiment,2nd,0.525,0.1416285
+sentiment,3rd,0.46458333333333335,0.15809411
+sentiment,4th,0.4791666666666667,0.17536438
+sentiment,farthest 20%,0.44375,0.20250627

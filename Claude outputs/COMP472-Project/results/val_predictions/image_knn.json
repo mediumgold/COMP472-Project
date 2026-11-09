@@ -1,0 +1,13 @@
+{
+  "model": "k-NN",
+  "config": {
+    "preprocessing": "hellinger+standardize",
+    "metric": "cosine",
+    "k": 100,
+    "weights": "distance",
+    "power": 16.0
+  },
+  "val_acc": 0.5805,
+  "fit_seconds": 0.08549212899924896,
+  "predict_seconds": 0.9615958920003322
+}

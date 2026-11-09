@@ -1,0 +1,31 @@
+{
+  "model": "Neural Network",
+  "config": {
+    "hidden": [
+      512,
+      256
+    ],
+    "activation": "relu",
+    "dropout": 0.5,
+    "lr": 0.001,
+    "optimizer": "adam",
+    "weight_decay": 0.0,
+    "batch_size": 128,
+    "epochs": 80
+  },
+  "preprocessing": "none",
+  "val_acc": 0.6829166666666666,
+  "train_acc": 0.79625,
+  "best_epoch": 16,
+  "best_epochs_5_seeds": [
+    16,
+    9,
+    4,
+    5,
+    9
+  ],
+  "seeds_mean_acc": 0.6795,
+  "ensemble5_val_acc": 0.68,
+  "fit_seconds": 27.683929288999934,
+  "predict_seconds": 0.024707569999918633
+}

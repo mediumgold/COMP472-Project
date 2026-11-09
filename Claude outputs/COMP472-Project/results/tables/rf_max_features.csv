@@ -1,0 +1,9 @@
+task,param,value,train_acc,val_acc,oob_acc,fit_s
+image,max_features,log2,1.0,0.2305,0.159875,71.8
+image,max_features,sqrt,1.0,0.2625,0.184125,88.0
+image,max_features,0.1,1.0,0.2685,0.1985625,141.9
+image,max_features,0.25,1.0,0.2545,0.201125,284.8
+sentiment,max_features,log2,1.0,0.56375,0.5305208333333333,8.3
+sentiment,max_features,sqrt,1.0,0.5858333333333333,0.536875,8.3
+sentiment,max_features,0.1,1.0,0.5725,0.5566666666666666,11.2
+sentiment,max_features,0.25,1.0,0.5804166666666667,0.5520833333333334,18.8

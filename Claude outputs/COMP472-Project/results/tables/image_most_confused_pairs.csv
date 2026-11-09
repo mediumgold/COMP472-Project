@@ -1,0 +1,16 @@
+class_a,class_b,confusions,a_as_b,b_as_a,in Decision Tree top-30,in Random Forest top-30,in Neural Network top-30,in k-Means top-30 co-clustered
+2,4,15,1,14,True,True,True,True
+2,3,12,1,11,True,True,True,True
+37,39,12,6,6,True,True,True,True
+7,8,11,9,2,False,True,True,True
+12,14,10,2,8,True,True,False,True
+14,39,10,6,4,False,True,False,False
+14,15,10,3,7,True,False,False,False
+1,2,10,8,2,False,False,True,False
+38,39,9,6,3,False,False,False,False
+13,25,9,4,5,True,False,False,False
+6,44,8,4,4,True,False,False,False
+6,39,8,8,0,False,False,False,False
+10,12,8,7,1,False,True,False,False
+12,29,8,0,8,False,False,False,False
+25,27,8,1,7,True,True,False,False

@@ -1,0 +1,14 @@
+{
+  "model": "Random Forest",
+  "config": {
+    "n_estimators": 400,
+    "max_features": "sqrt",
+    "max_depth": null,
+    "min_samples_leaf": 1
+  },
+  "val_acc": 0.6029166666666667,
+  "train_acc": 1.0,
+  "oob_acc": 0.609375,
+  "fit_seconds": 71.13371991199983,
+  "predict_seconds": 0.35238972900060617
+}
