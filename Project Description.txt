@@ -1,0 +1,670 @@
+Overview
+In this project, you will investigate how different Artificial Intelligence algorithms behave across two different types of data:
+
+Visual object recognition
+Natural-language sentiment analysis
+Instead of working directly with raw images or raw text, you will work with pre-extracted numerical feature vectors. For the visual task, each image has already been passed through a feature extractor and is represented by a fixed-dimensional vector. For the sentiment task, each text sample has already been passed through a pretrained language encoder and is also represented by a fixed-dimensional vector. You are not expected to train the feature extractors. You are expected to implement, compare, analyze, and explain multiple AI algorithms covered in the course. You will investigate different questions such as:
+
+How do different classifiers behave on different types of representations?
+Does an algorithm that performs well on visual features also perform well on language features?
+How sensitive are algorithms to their hyperparameters?
+How well do the feature representations naturally separate the classes?
+When does a more complex model provide a meaningful improvement over a simpler one?
+What kinds of examples are difficult for each model?
+Your final Kaggle score contributes to the performance component of the project. However, the majority of the project grade is based on your analysis, understanding, report, and presentation.
+
+Start
+
+14 days ago
+Close
+
+22 days to go
+How To Register
+How to register for the competition
+Create (or sign in to) your Kaggle account and verify your email address. Open the competition URL provided by the instructor and click Join Competition. Read and accept the competition rules. Once you have joined, you will be able to access the Data tab, which contains:
+
+image_train.csv
+image_test.csv
+sentiment_train.csv
+sentiment_test.csv
+sample_submission.csv You can upload your predictions using the Submit Predictions button. Every student must use their own Kaggle account.
+Team Requirements
+The project must be completed in teams of exactly three students.
+
+Each student must:
+
+Join the Kaggle competition.
+Accept the competition rules.
+Join their team's Kaggle team.
+Be listed as a member of the corresponding team submitted on Moodle. One student should create the Kaggle team and invite the other two members. Your Kaggle team name should use the following format: COMP472_GroupXX
+IMPORTANT: Each team must use the naming format COMP472_GroupXX, where XX corresponds to the group's assigned number (check the spreadsheet where you enter your team member's info).
+
+You can set your team name specifically for this competition through the Team tab without changing your personal Kaggle username or display name.
+
+Tasks
+Task 1: Visual Object Recognition
+The dataset contains 50 visual object classes, represented by 500-dimensional feature vectors.
+
+Training examples: 20,000 (400 per class)
+Test examples: 5,000 (100 per class)
+Feature dimensions: 500
+Labels: integers from 0 to 49 Example training data:
+id,feature_0,feature_1,...,feature_499,label
+img_train_000000,0.314,-0.129,...,1.004,17
+Task 2: Sentiment Analysis
+The dataset contains text embeddings generated using a frozen BERT encoder with mean pooling.
+
+Training examples: 12,000 (4,000 per class)
+Test examples: 5,000
+Feature dimensions: 768
+Labels: 0 = Negative, 1 = Neutral, 2 = Positive Example training data:
+id,feature_0,feature_1,...,feature_767,label
+text_train_000000,-0.141,0.318,...,-0.281,2
+Data
+The competition provides separate datasets for the two tasks.
+
+The files are:
+
+image_train.csv
+image_test.csv
+
+sentiment_train.csv
+sentiment_test.csv
+
+sample_submission.csv
+Training Data
+The training files contain an ID, numerical features, and a class label.
+
+Image training data (image_train.csv):
+
+id,feature_0,feature_1,...,feature_499,label
+img_train_000000,0.17,-0.42,...,0.91,12
+Sentiment training data (sentiment_train.csv):
+
+id,feature_0,feature_1,...,feature_767,label
+text_train_000000,-0.14,0.31,...,-0.28,2
+Test Data
+The test files contain IDs and features but no labels.
+
+Image test data (image_test.csv):
+
+id,feature_0,feature_1,...,feature_499
+img_000000,0.21,-0.13,...,1.02
+Sentiment test data (sentiment_test.csv):
+
+id,feature_0,feature_1,...,feature_767
+text_000000,-0.12,0.45,...,0.17
+The numerical values above are illustrative.
+
+You must generate predictions for all 10,000 test samples.
+
+Validation
+You should not use the Kaggle leaderboard as your primary validation method.
+
+Instead, you should divide the provided training data into your own training and validation sets.
+
+For example:
+
+Training Data
+    ↓
+Train Split + Validation Split
+Use your validation set to:
+
+Compare models
+Tune hyperparameters
+Detect overfitting
+Select your final model
+Decide which model to submit to Kaggle
+Your validation methodology must be explained in your project presentation. Repeatedly selecting models based only on the public Kaggle leaderboard will likely lead to overfitting to the public test subset.
+
+Evaluation
+Evaluation Metric
+Submissions are evaluated using classification accuracy:
+
+Accuracy = Correct Predictions / Total Predictions
+
+Both tasks contribute equally to the competition score:
+
+Overall Score = (Image Accuracy + Sentiment Accuracy) / 2
+
+Dataset Split
+Dataset	Training	Hidden Test
+Visual Object Recognition	20,000	5,000
+Sentiment Analysis	12,000	5,000
+Total	32,000	10,000
+The hidden test set is divided into two leaderboard partitions:
+
+Partition	Image Samples	Sentiment Samples	Total
+Public	2,500	2,500	5,000
+Private	2,500	2,500	5,000
+Public and Private Leaderboards
+Public Leaderboard: Updated after submissions, using 50% of the hidden test samples.
+
+Private Leaderboard: Revealed after the competition closes, using the remaining 50%.
+
+Only the private leaderboard score will be used to calculate the performance component of the project grade.
+
+Grading
+The project is worth 30% of your final COMP 472 course grade.
+
+The project grade consists of:
+
+80%: Presentation, analysis, and understanding
+20%: Kaggle competition performance
+The performance grade will use instructor-established baselines and linear interpolation, as described in the Grading section.
+
+The exact baselines will be communicated separately.
+
+Required Algorithms
+Each team must investigate multiple algorithms covered in COMP 472. At minimum, you must evaluate the following approaches:
+
+1. k-Nearest Neighbours
+You must implement and evaluate a k-Nearest Neighbours (k-NN) classifier.
+
+You should investigate relevant hyperparameters and design choices such as:
+
+Number of neighbours (k)
+Distance function
+Feature normalization
+Weighted vs. unweighted voting
+For example, you might investigate:
+
+k = 1
+k = 3
+k = 5
+k = 10
+k = 20
+You should be able to explain how changing k affects the classifier.
+
+2. Decision Tree
+You must implement and evaluate a Decision Tree classifier.
+
+You should investigate relevant design choices such as:
+
+Maximum tree depth
+Minimum samples required for a split
+Minimum samples in a leaf
+Splitting criterion
+You should discuss whether your Decision Tree appears to:
+
+Underfit
+Overfit
+Generalize well
+3. Random Forest
+You must implement and evaluate a Random Forest classifier.
+
+You should investigate relevant parameters such as:
+
+Number of trees
+Maximum tree depth
+Number of features considered at each split
+Other parameters appropriate to your implementation
+You should be able to compare the Random Forest against your individual Decision Tree.
+
+4. Neural Network
+You must implement a feed-forward Neural Network. You can use PyTorch for this, but it is not necessary (can be done using simple NumPy).
+
+For example:
+
+Input
+  ↓
+256 neurons
+  ↓
+64 neurons
+  ↓
+Output
+For the image task, the output layer should contain:
+
+50 outputs
+For the sentiment task:
+
+3 outputs
+You may investigate:
+
+Number of hidden layers
+Hidden-layer size
+Activation functions
+Learning rate
+Optimizer
+Batch size
+Number of epochs
+Weight decay
+Dropout
+You must train the Neural Network yourself.
+
+Unsupervised Learning Requirement
+In addition to classification, every team must perform at least one clustering experiment.
+
+You may use one of the provided datasets.
+
+Possible algorithms include:
+
+k-Means
+Gaussian Mixture Models
+Another clustering algorithm approved by the instructor
+The clustering experiment is not part of the Kaggle leaderboard. Instead, its purpose is to investigate the structure of the feature representations.
+
+Possible questions include (but are not limited to):
+
+Do sentiment examples naturally separate into positive, neutral, and negative groups?
+Do similar visual objects appear in similar clusters?
+Which classes are frequently grouped together?
+How does changing the number of clusters affect the results?
+How closely do the discovered clusters correspond to the true labels?
+You must discuss your clustering results during the project presentation.
+
+Coding Rules
+Coding Rules
+The purpose of the project is to demonstrate your understanding of the algorithms covered in COMP 472.
+
+You may use:
+
+Python
+NumPy
+Pandas
+Matplotlib
+PyTorch
+torch.nn
+torch.optim
+torch.utils.data
+Libraries may also be used for:
+
+Reading data
+Data manipulation
+Train/validation splitting
+Metrics
+Visualization
+However, for algorithms that you are required to implement, you may not simply import a complete implementation and use it as your solution.
+
+For example, the following does not count as implementing k-NN:
+
+from sklearn.neighbors import KNeighborsClassifier
+
+model = KNeighborsClassifier(...)
+Similarly, directly importing a complete Decision Tree implementation does not count as implementing the Decision Tree yourself.
+
+For required from-scratch algorithms, the core learning algorithm must be implemented by your team using Python, NumPy, or other approved low-level tools. If you're not sure, feel free to ask the professor or POD.
+
+For the Neural Network component, using PyTorch is allowed.
+
+For example:
+
+class MyNetwork(torch.nn.Module):
+    ...
+and:
+
+optimizer = torch.optim.Adam(...)
+are allowed.
+
+Pretrained Models and External Representations
+You must use only the feature vectors provided in the competition datasets.
+
+You may not use external pretrained models, including BERT, RoBERTa, CLIP, ResNet, or other pretrained encoders, to generate additional features. You can apply standard preprocessing, normalization, dimensionality reduction, and feature selection to these vectors, but you may not retrieve or generate additional representations from the original raw images or text.
+
+Your classifiers must be trained exclusively using the provided labeled training data.
+
+External Data
+You may only use the training data provided as part of this competition.
+
+You may not:
+
+Download additional labelled training examples
+Use external datasets
+Retrieve alternative versions of the competition dataset
+Manually determine hidden test labels
+Use external pretrained classifiers to predict the test labels
+Share hidden predictions between teams
+The point of of this restriction is to ensure that performance reflects the algorithms developed by your team, not by simply augmenting the data from outside sources.
+
+Hyperparameter Tuning
+Hyperparameter tuning is allowed (and encouraged). You should systematically investigate how important hyperparameters affect model performance.
+
+For example:
+
+Model	Hyperparameter	Example Values
+k-NN	k	1, 3, 5, 10, 20
+Decision Tree	Maximum depth	5, 10, 20, None
+Random Forest	Number of trees	10, 50, 100
+Neural Network	Learning rate	0.01, 0.001, 0.0001
+You do not need to test every possible combination.
+
+The goal is to demonstrate a reasonable experimental methodology and understand the effect of your choices. For each hyper parameter, it helps to be able to explain why the results changed.
+
+Evaluation and Submission
+Evaluation
+Evaluation Metric
+Submissions are evaluated using classification accuracy.
+
+Accuracy is calculated as:
+
+Accuracy = Number of Correct Predictions / Total Number of Predictions
+For example, if your model correctly predicts:
+
+8,000
+out of:
+
+10,000
+samples, then:
+
+Accuracy = 0.80
+or:
+
+80%
+Evaluation Across the Two Tasks
+Both the visual object classification task and the sentiment analysis task contribute to your competition score.
+
+The competition score will be calculated so that both tasks contribute equally:
+
+Overall Score = (Image Accuracy + Sentiment Accuracy) / 2
+This prevents one task from contributing more simply because it contains more test samples.
+
+Public and Private Leaderboards
+The hidden test data is divided into two subsets.
+
+Public Leaderboard
+During the competition, approximately 50% of the hidden test data will be used to calculate your public leaderboard score.
+
+This score appears after you submit your predictions.
+
+The public leaderboard provides feedback during the competition.
+
+It is not your final project performance score.
+
+Private Leaderboard
+The remaining approximately 50% of the hidden test data is used for the private leaderboard.
+
+The private leaderboard is hidden until the competition closes.
+
+Your final performance grade will be based on your private leaderboard score.
+
+Why Two Leaderboards?
+The public/private leaderboard split helps prevent overfitting to the competition test set.
+
+A team that repeatedly changes its model based only on public leaderboard performance may unintentionally overfit to the public test subset.
+
+Therefore:
+
+Use your own validation set for model development.
+
+Do not treat Kaggle submissions as a replacement for proper validation.
+
+Submission Limit
+Each team may submit a maximum of:
+
+100 submissions per day
+Submission Format
+Your submission must contain predictions for all 10,000 test samples.
+
+It must have exactly two columns:
+
+id,label
+img_000000,17
+img_000001,4
+text_000000,2
+text_000001,0
+For image samples, labels must be integers from 0 to 49.
+
+For sentiment samples:
+
+0 = Negative
+1 = Neutral
+2 = Positive
+Requirements
+Your submission must:
+
+Be a CSV file.
+Contain exactly two columns: id and label.
+Include all 10,000 test IDs exactly once.
+Contain no missing predictions.
+Use integer labels in the appropriate range.
+Match the IDs in sample_submission.csv.
+Important: Do not assume that the submission template has the same row ordering as the individual test files. Always associate predictions with their corresponding sample IDs.
+
+Example Submission Code
+The following example assumes that you have generated predictions for both test datasets, in the same order as their corresponding test CSVs.
+
+import pandas as pd
+
+image_test = pd.read_csv("image_test.csv")
+sentiment_test = pd.read_csv("sentiment_test.csv")
+
+sample = pd.read_csv("sample_submission.csv")
+
+# Predictions generated by your models.
+# image_predictions: one prediction per image test row
+# sentiment_predictions: one prediction per sentiment test row
+
+image_results = pd.DataFrame({
+    "id": image_test["id"],
+    "label": image_predictions
+})
+
+sentiment_results = pd.DataFrame({
+    "id": sentiment_test["id"],
+    "label": sentiment_predictions
+})
+
+# Combine predictions from both tasks.
+predictions = pd.concat(
+    [image_results, sentiment_results],
+    ignore_index=True
+)
+
+# Match predictions to the submission IDs.
+submission = sample[["id"]].merge(
+    predictions,
+    on="id",
+    how="left",
+    validate="one_to_one"
+)
+
+# Validate predictions.
+assert len(submission) == 10000
+assert submission["label"].notna().all()
+
+submission["label"] = submission["label"].astype(int)
+
+image_mask = submission["id"].str.startswith("img_")
+sentiment_mask = submission["id"].str.startswith("text_")
+
+assert submission.loc[
+    image_mask, "label"
+].between(0, 49).all()
+
+assert submission.loc[
+    sentiment_mask, "label"
+].between(0, 2).all()
+
+submission.to_csv("submission.csv", index=False)
+Upload submission.csv to Kaggle using Submit Predictions.
+
+Required Experimental Results
+Your final presentation must include experimental results for both datasets.
+
+At minimum, you should provide a comparison similar to:
+
+Method	Image Validation Accuracy	Sentiment Validation Accuracy
+k-NN	—	—
+Decision Tree	—	—
+Random Forest	—	—
+Neural Network	—	—
+You should report results for all required algorithms, not only your final Kaggle model.
+
+A method performing poorly is not automatically a bad result.
+
+You should instead try to explain why the method behaved that way.
+
+Evaluation Metrics for Your Analysis
+Your Kaggle score uses accuracy.
+
+For your project analysis, you may also examine:
+
+Precision
+Recall
+F1-score
+Confusion matrices
+These metrics may be computed using standard libraries.
+
+You are not required to implement evaluation metrics from scratch.
+
+For the sentiment task, you should investigate whether performance differs between:
+
+Negative
+Neutral
+Positive
+For the visual task, investigate which object classes are most frequently confused.
+
+Error Analysis
+Every team must perform a short error analysis.
+
+You should investigate examples or classes where your models fail.
+
+Possible questions include:
+
+Which classes are most frequently confused?
+Do multiple algorithms make the same mistakes?
+Which algorithm performs best on difficult classes?
+Is the neutral sentiment class harder to identify than positive or negative sentiment?
+Does feature normalization improve k-NN?
+Does increasing Decision Tree depth improve training accuracy but reduce validation accuracy?
+Does the Random Forest reduce overfitting compared with a single Decision Tree?
+Does the Neural Network correct mistakes made by simpler classifiers?
+The goal is to understand why your models behave the way they do, not simply to report accuracy values.
+
+Computational Efficiency
+Accuracy is not the only property of a useful model. You can briefly compare the computational requirements of your models (if you'd like).
+
+You can consider:
+
+Training time
+Prediction time
+Memory usage
+Model size
+You do not need to perform highly precise hardware benchmarking. Approximate measurements obtained under the same experimental conditions are sufficient.
+
+Grading
+The project represents 30% of your final COMP 472 course grade.
+
+The project itself is graded as follows:
+
+Presentation / Analysis / Understanding: 80%
+Competition Performance:                 20%
+Obtaining a high Kaggle score alone is therefore not sufficient to obtain a high project grade.
+
+You must also demonstrate that you understand the algorithms, experiments, and results produced by your team.
+
+Competition Performance Grade
+The performance component of the project is based on your team's final private leaderboard score.
+
+Several baseline models will be established by the teaching team.
+
+Let:
+
+B_low = lowest baseline
+B_mid = mid-range baseline
+S     = your team's private leaderboard score
+S_best = highest eligible student score
+Teams scoring below the lowest baseline receive:
+
+0%
+for the performance component.
+
+Teams reaching approximately the mid-range baseline receive:
+
+80%
+for the performance component.
+
+The highest-scoring eligible team receives:
+
+100%
+for the performance component.
+
+Intermediate grades will be calculated using linear interpolation.
+
+The exact baseline scores will be announced separately.
+
+Report
+Each team must submit a short report through Moodle. The report should summarize:
+
+Team members
+Algorithms implemented
+Preprocessing used
+Validation methodology
+Important hyperparameters
+Experimental results
+Clustering experiment
+Error analysis
+Final competition model
+Important observations
+Division of work among team members
+External resources or assistance used
+Detailed report requirements will be provided through Moodle.
+
+Presentation and Reproducibility
+Presentation
+Each team will present its solution, and all team members are expected to participate.
+
+You should be prepared to explain:
+
+How each algorithm works
+How you implemented each algorithm
+Why you selected specific hyperparameters
+How you constructed your validation set
+How the algorithms compared
+Differences between the visual and sentiment tasks
+Your clustering results
+Examples of model errors
+Evidence of overfitting or underfitting
+How your final Kaggle model was selected
+What you would improve if you had additional time
+The TA who is grading you may ask questions to individual team members. Every team member is expected to understand the entirety of the team's submitted work. So, the grading TA could ask any team member any part of the code or project, and each team member is expected to be familiar with everything.
+
+Reproducibility
+Your submitted code should allow the teaching team to reproduce your experiments.
+
+Where appropriate, set random seeds.
+
+For example:
+
+import random
+import numpy as np
+import torch
+
+SEED = 42
+
+random.seed(SEED)
+np.random.seed(SEED)
+torch.manual_seed(SEED)
+You should document:
+
+Python version
+Important library versions
+Random seed
+Training procedure
+Hyperparameters
+Exact bit-for-bit reproduction is not required, but your results should be reasonably reproducible by the markers.
+
+Hardware
+The project is designed so that specialized hardware should not be required for the classical Machine Learning methods. A GPU may accelerate Neural Network training, but a GPU should not be required to complete the project. Even a regular laptop running on CPU should be able to run your code in a timely manner.
+
+Academic Integrity
+All submitted code, experiments, analysis, and presentation material must represent the work of your team. Any external assistance must be acknowledged.
+
+This includes:
+
+Books
+Websites
+Tutorials
+Code repositories
+Online discussions
+AI tools
+Other external resources
+You may discuss general concepts with other students, but you may not share:
+
+Code
+Prediction files
+Hidden test predictions
+Experimental results
+Completed solutions
+between project teams.
+

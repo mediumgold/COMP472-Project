@@ -1,0 +1,134 @@
+
+Dataset Description
+You are provided 2 datasets: 1) Visual Object Recognition and 2) Sentiment Analysis. Both datasets consist of pre-extracted numerical feature vectors, allowing you to focus on developing, evaluating, and comparing different AI algorithms.
+
+You are not required to work with raw images or text, nor are you expected to train the feature extractors.
+
+1. Visual Object Recognition Dataset
+The visual dataset contains feature representations of images belonging to 50 different household-object classes.
+
+Each image has been processed using a pretrained visual feature extractor, producing a 500-dimensional feature vector.
+
+Dataset Statistics:
+
+Property	Value
+Training samples	20,000
+Test samples	5,000
+Number of classes	50
+Feature dimensions	500
+Training samples per class	400
+Test samples per class	100
+Class labels	0–49
+Files:
+
+image_train.csv: Contains image feature vectors and their corresponding class labels.
+image_test.csv: Contains image feature vectors without labels.
+Data Format:
+
+Each row represents one image, with the following columns:
+
+id: Unique identifier for the sample.
+feature_0 to feature_499: Numerical features extracted from the image.
+label: Integer representing the correct object class (training data only).
+The original images are not provided. You must train your classifiers using the supplied numerical features.
+
+2. Sentiment Analysis Dataset
+The sentiment dataset contains feature representations of text samples categorized into three sentiment classes.
+
+Each text sample has been processed using a frozen pretrained BERT language encoder (bert-base-uncased). The resulting token representations were aggregated using mean pooling to produce a 768-dimensional feature vector.
+
+Dataset Statistics:
+
+Property	Value
+Training samples	12,000
+Test samples	5,000
+Number of classes	3
+Feature dimensions	768
+Training samples per class	4,000
+Class labels	0, 1, 2
+Sentiment Labels:
+
+Label	Sentiment
+0	Negative
+1	Neutral
+2	Positive
+Files:
+
+sentiment_train.csv: Contains text feature vectors and their corresponding sentiment labels.
+sentiment_test.csv: Contains text feature vectors without labels.
+Data Format:
+
+Each row represents one text sample, with the following columns:
+
+id: Unique identifier for the sample.
+feature_0 to feature_767: Numerical features extracted using BERT.
+label: Integer representing the sentiment class (training data only).
+The original text samples are not provided. You are not expected to train, fine-tune, or run BERT. Your task is to develop classifiers using the provided feature representations.
+
+The sentiment dataset is derived from the TweetEval sentiment classification benchmark.
+
+3. Provided Files
+The competition provides five CSV files:
+
+File	Samples	Description
+image_train.csv	20,000	Labeled visual feature vectors
+image_test.csv	5,000	Unlabeled visual feature vectors
+sentiment_train.csv	12,000	Labeled sentiment feature vectors
+sentiment_test.csv	5,000	Unlabeled sentiment feature vectors
+sample_submission.csv	10,000	Template for submitting predictions
+Important: The two datasets have different feature dimensions and different numbers of classes. You should develop and evaluate your classifiers separately for each task.
+
+4. Training and Validation
+The provided training files contain all the labeled examples available for model development.
+
+You are expected to divide the training data into your own training and validation subsets.
+
+Your validation set should be used for:
+
+Comparing different classification algorithms.
+Selecting hyperparameters.
+Evaluating model generalization.
+Investigating overfitting and underfitting.
+Selecting your final models.
+The hidden test labels must not be used during model development.
+
+You may apply preprocessing techniques such as normalization, standardization, feature selection, and dimensionality reduction. However, any preprocessing that learns parameters from the data must be fitted using the appropriate training subset to avoid data leakage.
+
+5. Test Data and Evaluation
+The competition contains 10,000 hidden test samples, divided equally between the two tasks.
+
+Task	Public Test	Private Test	Total
+Visual Object Recognition	2,500	2,500	5,000
+Sentiment Analysis	2,500	2,500	5,000
+Total	5,000	5,000	10,000
+Both tasks contribute equally to the overall competition score:
+
+Overall Accuracy = (Image Accuracy + Sentiment Accuracy) / 2
+
+The public leaderboard provides feedback during the competition. The private leaderboard is revealed after the competition closes and determines the final performance ranking.
+
+6. Submission File
+You must generate predictions for all 10,000 test samples and combine them into a single CSV file.
+
+Use sample_submission.csv as your template.
+
+The submission must contain exactly two columns:
+
+Column	Description
+id	Unique identifier matching a test sample
+label	Predicted class label
+Label Requirements:
+
+Image samples (img_ prefix): integer labels from 0 to 49.
+Sentiment samples (text_ prefix): integer labels from 0 to 2.
+Your submission must include every test sample exactly once, without missing predictions.
+
+Important: The rows in sample_submission.csv may not follow the same order as the individual test files. Always match your predictions to the correct sample IDs rather than relying on row order.
+
+7. Additional Notes
+Only the provided feature vectors may be used for training and prediction.
+External training datasets are not permitted.
+Generating additional features using pretrained models is prohibited.
+The test labels are hidden and must not be obtained from external sources.
+The primary goal is to investigate and compare AI algorithms, not simply maximize leaderboard accuracy.
+For details about the required algorithms, coding restrictions, evaluation criteria, and grading, refer to the other sections of the competition page.
