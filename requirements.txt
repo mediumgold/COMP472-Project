@@ -1,6 +1,6 @@
 # Versions used to produce the results in results/ (Python 3.13). Nearby versions should work.
 numpy>=2.0          # used: 2.5.3
-pandas>=2.0         # used: 3.0.5
+pandas>=2.1         # used: 3.0.5
 matplotlib>=3.8     # used: 3.11.2
 torch>=2.3          # used: 2.15.0   (neural network only)
 scikit-learn>=1.4   # used: 1.9.1    (evaluation metrics only: F1, confusion matrix, NMI, ARI)

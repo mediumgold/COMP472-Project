@@ -1,8 +1,14 @@
-# Competition data: too large for GitHub (sentiment_train.csv > 100 MB) and not ours to redistribute
-data/*.csv
-data/*.npz
+# Competition data: too large for GitHub (sentiment_train.csv > 100 MB) and not ours to
+# redistribute. Ignored wherever it is (data/, DataSets/, ...).
+**/image_train.csv
+**/image_test.csv
+**/sentiment_train.csv
+**/sentiment_test.csv
+**/cache_*.npz
+*.zip
 
 # Python / Jupyter clutter
+.venv/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/

@@ -1,7 +1,0 @@
-task,preprocessing,hidden,activation,dropout,lr,optimizer,weight_decay,batch_size,epochs,seed,best_val_acc,best_epoch,train_acc_at_best,last_val_acc,last_train_acc,fit_s
-image,none,"(256, 64)",relu,0.0,0.001,adam,0.0,128,60,42,0.3155,45,0.79775,0.31425,0.964625,26.6
-image,standardize,"(256, 64)",relu,0.0,0.001,adam,0.0,128,60,42,0.3335,6,0.8416875,0.327,1.0,24.2
-image,hellinger,"(256, 64)",relu,0.0,0.001,adam,0.0,128,60,42,0.30025,45,0.8223125,0.2925,0.9808125,25.0
-image,hellinger+standardize,"(256, 64)",relu,0.0,0.001,adam,0.0,128,60,42,0.327,8,0.9416875,0.32225,1.0,23.6
-sentiment,none,"(256, 64)",relu,0.0,0.001,adam,0.0,128,60,42,0.6783333333333333,3,0.7007291666666666,0.6241666666666666,1.0,19.8
-sentiment,standardize,"(256, 64)",relu,0.0,0.001,adam,0.0,128,60,42,0.6725,1,0.7202083333333333,0.63125,1.0,17.2

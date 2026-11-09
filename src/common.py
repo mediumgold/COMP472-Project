@@ -21,7 +21,18 @@ import pandas as pd
 # Paths and seed
 # ----------------------------------------------------------------------------
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-DATA_DIR = PROJECT_ROOT / "data"
+
+
+def _find_data_dir():
+    """The competition CSVs may live in data/ (default) or DataSets/."""
+    for name in ("data", "DataSets", "datasets", "Data"):
+        d = PROJECT_ROOT / name
+        if (d / "image_train.csv").exists() or (d / "cache_image.npz").exists():
+            return d
+    return PROJECT_ROOT / "data"
+
+
+DATA_DIR = _find_data_dir()
 RESULTS_DIR = PROJECT_ROOT / "results"
 TABLES_DIR = RESULTS_DIR / "tables"
 FIG_DIR = RESULTS_DIR / "figures"
@@ -51,7 +62,13 @@ def set_seed(seed=SEED):
 # Loading
 # ----------------------------------------------------------------------------
 def _read_csv(name):
-    df = pd.read_csv(DATA_DIR / f"{name}.csv")
+    path = DATA_DIR / f"{name}.csv"
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Could not find {path.name}. Put the five competition CSVs (image_train.csv, "
+            f"image_test.csv, sentiment_train.csv, sentiment_test.csv, sample_submission.csv) "
+            f"in the folder {PROJECT_ROOT / 'data'}")
+    df = pd.read_csv(path)
     feat_cols = [c for c in df.columns if c.startswith("feature_")]
     X = df[feat_cols].to_numpy(dtype=np.float32)
     y = df["label"].to_numpy(dtype=np.int64) if "label" in df.columns else None

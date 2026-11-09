@@ -1,7 +1,0 @@
-task,param,value,train_acc,val_acc,oob_acc,fit_s
-image,min_samples_leaf,1,1.0,0.2625,0.184125,96.8
-image,min_samples_leaf,3,0.9999375,0.26075,0.1990625,72.8
-image,min_samples_leaf,10,0.9859375,0.256,0.1970625,31.9
-sentiment,min_samples_leaf,1,1.0,0.5858333333333333,0.536875,16.0
-sentiment,min_samples_leaf,3,0.9997916666666666,0.58,0.5559375,13.6
-sentiment,min_samples_leaf,10,0.9829166666666667,0.585,0.5684375,8.6

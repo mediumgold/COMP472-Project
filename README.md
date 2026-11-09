@@ -17,27 +17,60 @@ plus an unsupervised **k-Means** clustering experiment (also from scratch).
 
 ---
 
-## Quick start
+## How to run
+
+### One-time setup (Mac / Linux terminal)
 
 ```bash
-pip install -r requirements.txt
-# put the five competition CSVs in data/ (see "Data" below)
-jupyter lab            # then run notebooks/01 … 08 in order
+cd ~/Desktop/COMP472-Project          # the project folder
+python3 -m venv .venv                 # a private Python environment for this project
+source .venv/bin/activate             # turn it on (do this again in every new terminal)
+pip install -r requirements.txt       # numpy, pandas, matplotlib, torch, scikit-learn, jupyter
 ```
 
-Or run everything headless, in order:
+Then make sure the five competition CSVs are in the `data/` folder (see "Data" below).
+(Windows: use `python` instead of `python3` and `.venv\Scripts\activate` instead of `source …`.)
+
+### Option A: one command, all algorithms on both datasets (`main.py`)
+
+```bash
+python main.py                  # trains k-NN, Decision Tree, Random Forest, Neural Network
+                                # on both datasets and prints the validation-accuracy table
+python main.py --submission     # same, then retrains the final models on all data → submission.csv
+```
+
+Other useful options:
+
+```bash
+python main.py --task image             # one dataset only (image or sentiment)
+python main.py --models knn,dt          # some models only (knn, dt, rf, nn)
+python main.py --rf-trees 100           # quicker Random Forest (400 = the reported result)
+python main.py --submission-only        # just rebuild submission.csv (~1 min)
+```
+
+`main.py` re-runs each model's **final, best configuration** only (≈ 10 min on a 2-core machine,
+mostly the 400-tree image forest). It prints exactly the numbers in the results table.
+
+### Option B: the full experiments (notebooks)
+
+The notebooks contain everything behind those configurations: every hyperparameter sweep, all
+plots, the clustering experiment and the error analysis. They are saved **with their outputs**, so
+you can read every result without running anything:
+
+```bash
+jupyter lab                     # opens in your browser; run notebooks/01 … 08 in order
+```
+
+Or run them all headless, in order:
 
 ```bash
 for nb in notebooks/0*.ipynb; do jupyter nbconvert --to notebook --execute --inplace "$nb"; done
 ```
 
-`submission.csv` (ready to upload to Kaggle) is written to the project root by notebook 08.
-The notebooks are saved **with their outputs**, so you can read every result without re-running anything.
-
 ## Data
 
-Put these files in `data/` (they are excluded from git by `.gitignore`: `sentiment_train.csv` is
-over GitHub's 100 MB limit):
+The code needs the five competition CSVs in a `data/` folder inside the project (a folder named
+`DataSets/` also works):
 
 ```
 data/image_train.csv   data/image_test.csv
@@ -45,12 +78,15 @@ data/sentiment_train.csv   data/sentiment_test.csv
 data/sample_submission.csv
 ```
 
-The first load parses the CSVs and caches them as `data/cache_<task>.npz` for fast reloading.
+They are excluded from git by `.gitignore` (`sentiment_train.csv` is over GitHub's 100 MB limit),
+so each teammate needs to download them from Kaggle into their own copy. The first run parses
+the CSVs and caches them as `data/cache_<task>.npz` so later runs load faster.
 
 ## Project layout
 
 ```
-src/                      our implementations (imported by every notebook)
+main.py                   one command: all 4 models x both datasets (final configurations)
+src/                      our implementations (imported by main.py and every notebook)
   common.py               loading, the single validation split, preprocessing, seed, helpers
   knn.py                  k-NN (from scratch)
   decision_tree.py        Decision Tree (from scratch, CART with Gini / entropy)
